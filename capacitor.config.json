@@ -1,0 +1,1 @@
+{ "appId": "com.pekapro.pekalogo", "appName": "Pekalogo", "webDir": "www", "android": { "allowMixedContent": false, "backgroundColor": "#0b0b10" }, "server": { "androidScheme": "https" } }

@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><meta name="theme-color" content="#0b0b10"/><title>Pekalogo</title>
+<script>
+// Panel rojo de errores en pantalla (solo APK), en vez de pantalla negra.
+(function(){function show(m){var e=document.getElementById('boot-error');if(!e){e=document.createElement('pre');e.id='boot-error';e.style.cssText='position:fixed;left:0;right:0;bottom:0;max-height:60vh;z-index:99999;margin:0;padding:12px;overflow:auto;background:#b00020;color:#fff;font:12px/1.4 monospace;white-space:pre-wrap';(document.body||document.documentElement).appendChild(e);e.textContent='Pekalogo: error\n'+navigator.userAgent+'\n\n'}e.textContent+=m+'\n\n'}
+window.__bootError=show;window.addEventListener('error',function(e){show((e.message||'Error')+(e.filename?'\n'+e.filename+':'+e.lineno:'')+(e.error&&e.error.stack?'\n'+e.error.stack:''))});
+window.addEventListener('unhandledrejection',function(e){var r=e.reason;show('Promesa rechazada: '+(r&&(r.stack||r.message)||r))});
+setTimeout(function(){var r=document.getElementById('root');if(r&&!r.firstChild)show('La app no ha montado tras 8 s (¿el JS no carga en este WebView?).')},8000)})();
+</script></head><body><div id="root"></div><script type="module" src="../src/main.jsx"></script></body></html>
