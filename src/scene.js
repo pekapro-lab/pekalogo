@@ -5,7 +5,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import { Font } from 'three/examples/jsm/loaders/FontLoader.js'
 import fontData from './font.json'
 const font = new Font(fontData)
-export const clean = (s) => [...(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')].filter((c) => c === ' ' || font.data.glyphs[c]).join('')
+export const clean = (s) => [...(s || '').normalize('NFC')].map((c) => font.data.glyphs[c] ? c : c.normalize('NFD').replace(/[\u0300-\u036f]/g, '')).filter((c) => c === ' ' || font.data.glyphs[c]).join('')
 
 function canvasTex(draw, w = 512) { const c = document.createElement('canvas'); c.width = c.height = w; draw(c.getContext('2d'), w); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; return t }
 const marble = () => canvasTex((g, w) => { g.fillStyle = '#eeeae4'; g.fillRect(0, 0, w, w); for (let i = 0; i < 40; i++) { g.strokeStyle = `rgba(90,90,100,${Math.random() * .35})`; g.lineWidth = Math.random() * 3; g.beginPath(); let x = Math.random() * w, y = 0; g.moveTo(x, y); while (y < w) { x += (Math.random() - .5) * 40; y += 20; g.lineTo(x, y) } g.stroke() } })

@@ -6,7 +6,7 @@ const errors = []
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text())); page.on('pageerror', (e) => errors.push(String(e)))
 await page.goto(URL_); await page.waitForTimeout(1500)
 for (const g of ['material', 'light', 'shape', 'aspect', 'bg']) { const n = await page.locator(`[data-group=${g}] .chip`).count(); for (let i = 0; i < n; i++) { await page.locator(`[data-group=${g}] .chip`).nth(i).click(); await page.waitForTimeout(250) } }
-await page.locator('[data-group=shape] .chip', { hasText: 'Monograma' }).click(); await page.locator('[data-group=aspect] .chip', { hasText: '16:9' }).click(); await page.fill('#name', 'Pekalogó'); await page.click('#suggest'); await page.waitForTimeout(600)
+await page.locator('[data-group=shape] .chip', { hasText: 'Monograma' }).click(); await page.locator('[data-group=aspect] .chip', { hasText: '16:9' }).click(); await page.fill('#name', 'Pekalogó Ñandú ¿Sí?'); await page.click('#suggest'); await page.waitForTimeout(600)
 await page.click('#download'); await page.waitForTimeout(800)
 const exp = await page.evaluate(() => window.__pekalogoExport); const hist = await page.locator('.hist img').count()
 await page.screenshot({ path: process.env.SHOT || '/workspace/pekalogo.png', fullPage: true })
